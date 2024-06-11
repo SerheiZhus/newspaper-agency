@@ -16,7 +16,6 @@ class Topic(models.Model):
 
 class Redactor(AbstractUser):
     years_of_experience = models.PositiveIntegerField(
-        max_length=100,
         default=0,
         blank=True,
         null=True
