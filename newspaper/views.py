@@ -32,12 +32,15 @@ def index(request) -> render:
 
 class TopicListView(generic.ListView):
     model = Topic
+    paginate_by = 3
 
 
 class NewspaperListView(generic.ListView):
     model = Newspaper
     queryset = Newspaper.objects.all().prefetch_related("topic", "publishers")
+    paginate_by = 3
 
 
 class RedactorListView(generic.ListView):
     model = Redactor
+    paginate_by = 3
