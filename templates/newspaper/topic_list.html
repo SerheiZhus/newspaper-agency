@@ -1,11 +1,21 @@
 {% extends "base.html" %}
+
+{% block title %}
+  <title>Topic List</title>
+{% endblock %}
+
+
+
 {% block content %}
     <h1>Topic List</h1>
+  {% if topic_list %} 
   <ul>
   {% for topic in topic_list %}
   <li>{{ topic.name }}</li>
   {% endfor %}
   </ul>
+  {% else %}
+  <p>There are no topic in newspaper agency</p>
+  {% endif %}
 {% endblock %}
 
-{% block title %}Newspaper Agency{% endblock %}
