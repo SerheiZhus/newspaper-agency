@@ -36,6 +36,7 @@ class TopicListView(generic.ListView):
 
 class NewspaperListView(generic.ListView):
     model = Newspaper
+    queryset = Newspaper.objects.all().prefetch_related("topic", "publishers")
 
 
 class RedactorListView(generic.ListView):
