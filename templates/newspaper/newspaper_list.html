@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Newspaper List</title>
+{% endblock %}
+
+{% block content %}
+
+<h1>Newspaper List</h1>
+{% if newspaper_list %}
+<ul>
+  {% for newspaper in newspaper_list %}
+    <li>{{ newspaper.title }} - ({{ newspaper.topic }}, {{ newspaper.published_date }})</li>
+  {% endfor %}
+</ul>
+  {% else %}
+<p>There are no newspaper in newspaper agency</p>
+{% endif %}
+
+{% endblock %}
+
