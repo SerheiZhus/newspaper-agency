@@ -1,11 +1,17 @@
 from django.urls import path
 
-from newspaper.views import index, TopicListview
+from newspaper.views import (
+    index,
+    TopicListView,
+    NewspaperListView,
+)
 
-urlpatterns = {
+urlpatterns = [
     path("", index, name="index"),
-    path("topics_list/", TopicListview.as_view(), name="topics"),
+    path("topics_list/", TopicListView.as_view(), name="topics-list"),
+    path("newspaper_list/", NewspaperListView.as_view(), name="newspapers-list"),
 
-}
+
+]
 
 app_name = "newspaper"
