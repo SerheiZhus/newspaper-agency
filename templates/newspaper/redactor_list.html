@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Redactor List</title>
+{% endblock %}
+
+
+
+{% block content %}
+  <h1>Redactor List</h1>
+  {% if redactor_list %}
+    <ul>
+      {% for redactor in redactor_list %}
+        <li>{{ redactor.username }}: ({{ redactor.first_name }}
+          {{ redactor.last_name }} - {{ redactor.years_of_experience }})
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no redactor in newspaper agency</p>
+  {% endif %}
+{% endblock %}
