@@ -30,6 +30,11 @@ def index(request) -> render:
     )
 
 
-class TopicListview(generic.ListView):
+class TopicListView(generic.ListView):
     model = Topic
-    template_name = "newspaper/topic_list.html"
+
+
+class NewspaperListView(generic.ListView):
+    model = Newspaper
+
+
