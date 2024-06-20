@@ -45,6 +45,15 @@ class NewspaperListView(generic.ListView):
     paginate_by = 3
 
 
+class NewspaperDetailView(generic.DetailView):
+    model = Newspaper
+
+
 class RedactorListView(generic.ListView):
     model = Redactor
     paginate_by = 3
+
+
+class RedactorDetailView(generic.DetailView):
+    model = Redactor
+
