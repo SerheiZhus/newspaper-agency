@@ -6,16 +6,22 @@
 
 {% block content %}
 
-<h1>Newspaper List</h1>
-{% if newspaper_list %}
-<ul>
-  {% for newspaper in newspaper_list %}
-    <li>{{ newspaper.title }} - ({{ newspaper.topic }}, {{ newspaper.published_date }})</li>
-  {% endfor %}
-</ul>
+  <h1>Newspaper List</h1>
+  {% if newspaper_list %}
+    <ul>
+      
+        {% for newspaper in newspaper_list %}
+          <li>
+          <h4>{{ newspaper.title }}</h4>
+          <p>Topic: {{ newspaper.topic.get }}</p>
+          <p>Publisher on: {{ newspaper.published_date }}</p>
+
+        {% endfor %}
+         </li>
+    </ul>
   {% else %}
-<p>There are no newspaper in newspaper agency</p>
-{% endif %}
+    <p>There are no newspaper in newspaper agency</p>
+  {% endif %}
 
 {% endblock %}
 
