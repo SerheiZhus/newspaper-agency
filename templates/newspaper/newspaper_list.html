@@ -9,15 +9,13 @@
   <h1>Newspaper List</h1>
   {% if newspaper_list %}
     <ul>
-      
-        {% for newspaper in newspaper_list %}
-          <li>
-          <h4>{{ newspaper.title }}</h4>
-          <p>Topic: {{ newspaper.topic.get }}</p>
-          <p>Publisher on: {{ newspaper.published_date }}</p>
 
-        {% endfor %}
-         </li>
+      {% for newspaper in newspaper_list %}
+        <li>
+        <p><a href="{% url 'newspaper:newspaper-detail' newspaper.id %}">{{ newspaper.title }}</a></p>
+          
+      {% endfor %}
+      </li>
     </ul>
   {% else %}
     <p>There are no newspaper in newspaper agency</p>

@@ -11,7 +11,8 @@
   {% if redactor_list %}
     <ul>
       {% for redactor in redactor_list %}
-        <li>{{ redactor.username }}: ({{ redactor.first_name }}
+        <li><a href="{% url 'newspaper:redactor-detail' redactor.id %}">
+          {{ redactor.username }}:</a>({{ redactor.first_name }}
           {{ redactor.last_name }} - {{ redactor.years_of_experience }})
         </li>
       {% endfor %}
