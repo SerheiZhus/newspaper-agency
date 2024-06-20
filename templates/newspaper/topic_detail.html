@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+  {{ topic.name }}
+  </h1>
+  <h3> Redactors </h3>
+  
+  {% for redactor in topic.newspapers.all %}
+    <hr>
+      <p>{{ redactor.id }}</p>
+      <p><a href="#">{{ redactor.publishers.get.username}}</a></p>
+    
+    {% empty %}
+    <p>No redactors</p>
+
+  {% endfor %}
+{% endblock %}
