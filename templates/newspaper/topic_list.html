@@ -5,7 +5,13 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Topic List</h1>
+  <h1>
+    Topic List
+    <a href="{% url 'newspaper:topics-create' %}" class="btn btn-primary link-to-page">
+      Create
+    </a>
+
+  </h1>
   {% if topic_list %}
     <ul>
       {% for topic in topic_list %}

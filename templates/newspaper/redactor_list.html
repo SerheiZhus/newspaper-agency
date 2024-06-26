@@ -7,11 +7,16 @@
 
 
 {% block content %}
-  <h1>Redactor List</h1>
+  <h1>
+    Redactor List
+    <a href="{% url 'newspaper:redactors-create' %}" class="btn btn-primary link-to-page">
+      Create
+    </a>
+  </h1>
   {% if redactor_list %}
     <ul>
       {% for redactor in redactor_list %}
-        <li><a href="{% url 'newspaper:redactor-detail' redactor.id %}">
+        <li><a href="{% url 'newspaper:redactors-detail' redactor.id %}">
           {{ redactor.username }}:</a>({{ redactor.first_name }}
           {{ redactor.last_name }} - {{ redactor.years_of_experience }})
         </li>
