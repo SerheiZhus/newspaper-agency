@@ -4,7 +4,13 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from newspaper.forms import RedactorCreationForm, NewspaperForm
+from newspaper.forms import (
+    RedactorCreationForm,
+    NewspaperForm,
+    RedactorSearchForm,
+    TopicSearchForm,
+    NewspaperSearchForm
+)
 from newspaper.models import (
     Redactor,
     Topic,
@@ -45,6 +51,24 @@ class TopicListView(
 ):
     model = Topic
     paginate_by = 3
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(TopicListView, self).get_context_data(**kwargs)
+        title = self.request.GET.get("title", "")
+        context["search_form"] = TopicSearchForm(
+            initial={
+                "title": title
+            }
+        )
+        return context
+
+    def get_queryset(self):
+        form = TopicSearchForm(self.request.GET)
+        if form.is_valid():
+            return Topic.objects.filter(
+                name__icontains=form.cleaned_data["title"]
+            )
+        return Topic.objects.all()
 
 
 class TopicDetailView(
@@ -88,8 +112,25 @@ class NewspaperListView(
     generic.ListView
 ):
     model = Newspaper
-    queryset = Newspaper.objects.all().prefetch_related("topic", "publishers")
     paginate_by = 3
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(NewspaperListView, self).get_context_data(**kwargs)
+        title = self.request.GET.get("title", "")
+        context["search_form"] = NewspaperSearchForm(
+            initial={
+                "title": title
+            }
+        )
+        return context
+
+    def get_queryset(self):
+        form = NewspaperSearchForm(self.request.GET)
+        if form.is_valid():
+            return Newspaper.objects.filter(
+                title__icontains=form.cleaned_data["title"]
+            )
+        return Newspaper.objects.all().prefetch_related("topic", "publishers")
 
 
 class NewspaperDetailView(
@@ -133,6 +174,24 @@ class RedactorListView(
 ):
     model = Redactor
     paginate_by = 3
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(RedactorListView, self).get_context_data(**kwargs)
+        title = self.request.GET.get("title", "")
+        context["search_form"] = RedactorSearchForm(
+            initial={
+                "title": title
+            }
+        )
+        return context
+
+    def get_queryset(self):
+        form = RedactorSearchForm(self.request.GET)
+        if form.is_valid():
+            return Redactor.objects.filter(
+                username__icontains=form.cleaned_data["title"]
+            )
+        return Redactor.objects.all()
 
 
 class RedactorDetailView(

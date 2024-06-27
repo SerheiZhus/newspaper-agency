@@ -52,3 +52,42 @@ class NewspaperForm(forms.ModelForm):
     class Meta:
         model = Newspaper
         fields = "__all__"
+
+
+class RedactorSearchForm(forms.Form):
+    title = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Search by username"
+            }
+        )
+    )
+
+
+class TopicSearchForm(forms.Form):
+    title = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Search by topic"
+            }
+        )
+    )
+
+
+class NewspaperSearchForm(forms.Form):
+    title = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Search by newspaper"
+            }
+        )
+    )
