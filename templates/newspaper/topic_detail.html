@@ -8,8 +8,8 @@
   
   {% for redactor in topic.newspapers.all %}
     <hr>
-      <p>{{ redactor.id }}</p>
-      <p><a href="#">{{ redactor.publishers.get.username}}</a></p>
+      <p>ID: {{ redactor.id }}</p>
+      <p>USERNAME: <a href="#">{{ redactor.publishers.get.username}}</a></p>
     
     {% empty %}
     <p>No redactors</p>

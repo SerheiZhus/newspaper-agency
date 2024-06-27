@@ -9,19 +9,29 @@
   <h1>
     Newspaper List
     <a href="{% url 'newspaper:newspapers-create' %}" class="btn btn-primary link-to-page">
-      Create
+      Create Newspaper
     </a>
   </h1>
   {% if newspaper_list %}
-    <ul>
-
+    <table class="table">
+      <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Published date</th>
+      <th>Update</th>
+      <th>Delete</th>
+      </tr>
       {% for newspaper in newspaper_list %}
-        <li>
-        <p><a href="{% url 'newspaper:newspapers-detail' newspaper.id %}">{{ newspaper.title }}</a></p>
-
+        <tr>
+        <td>{{ newspaper.id }}</td>
+        <td><a href="{% url 'newspaper:newspapers-detail' newspaper.id %}">{{ newspaper.title }}</a></td>
+        <td>{{ newspaper.published_date }}</td>
+        <td><a href="{% url 'newspaper:newspapers-update' newspaper.id %}">Update</a></td>
+        <td><a style="color:red" href="{% url 'newspaper:newspapers-delete' pk=newspaper.id %}">Delete</a></td>
+        </tr>
+        
       {% endfor %}
-      </li>
-    </ul>
+    </table>
   {% else %}
     <p>There are no newspaper in newspaper agency</p>
   {% endif %}
