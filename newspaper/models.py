@@ -25,7 +25,7 @@ class Redactor(AbstractUser):
         ordering = ("username", )
 
     def __str__(self) -> str:
-        return f"{self.username}: ({self.first_name} {self.last_name})"
+        return f"{self.username}"
 
     def get_absolute_url(self):
         return reverse("newspaper:redactors-detail", args=[str(self.id)])
@@ -42,4 +42,4 @@ class Newspaper(models.Model):
         ordering = ("title", )
 
     def __str__(self) -> str:
-        return f"{self.title} - {self.topic} - {self.published_date}"
+        return f"{self.title}"

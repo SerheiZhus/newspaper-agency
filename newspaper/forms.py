@@ -4,20 +4,18 @@ from django.core.validators import (
     MaxLengthValidator,
     MinLengthValidator
 )
-
 from django import forms
-
 from newspaper.models import (
     Redactor,
     Newspaper,
-    Topic
+    Topic,
 )
 
 
 class RedactorCreationForm(UserCreationForm):
     EXPERIENCE = 100  # years
     years_of_experience = forms.CharField(
-
+        required=True,
         validators=[
             MinLengthValidator(0),
             MaxLengthValidator(EXPERIENCE),
@@ -36,6 +34,21 @@ class RedactorCreationForm(UserCreationForm):
         )
 
 
+class RedactorExperienceUpdateForm(forms.ModelForm):
+    EXPERIENCE = 100  # years
+    years_of_experience = forms.CharField(
+        required=True,
+        validators=[
+            MinLengthValidator(0),
+            MaxLengthValidator(EXPERIENCE),
+        ]
+    )
+
+    class Meta:
+        model = Redactor
+        fields = ["years_of_experience"]
+
+
 class NewspaperForm(forms.ModelForm):
     publishers = forms.ModelMultipleChoiceField(
         queryset=get_user_model().objects.all(),
@@ -45,13 +58,16 @@ class NewspaperForm(forms.ModelForm):
         queryset=Topic.objects.all(),
         widget=forms.CheckboxSelectMultiple
     )
-    published_date = forms.DateField(
-        widget=forms.SelectDateWidget
-    )
 
     class Meta:
         model = Newspaper
         fields = "__all__"
+
+
+class NewspaperUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Newspaper
+        fields = ["title", "content", "published_date"]
 
 
 class RedactorSearchForm(forms.Form):
@@ -61,6 +77,7 @@ class RedactorSearchForm(forms.Form):
         label="",
         widget=forms.TextInput(
             attrs={
+
                 "placeholder": "Search by username"
             }
         )

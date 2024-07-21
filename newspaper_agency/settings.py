@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "newspaper",
     "crispy_forms",
-    "crispy_bootstrap4",
+    "crispy_bootstrap5",
 
 ]
 
@@ -129,5 +129,6 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "newspaper.Redactor"
 LOGIN_REDIRECT_URL = "/"
-CRISPY_TEMPLATE_PACK = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 

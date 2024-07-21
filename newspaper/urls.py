@@ -3,41 +3,104 @@ from newspaper.views import (
     index,
     TopicListView,
     TopicDetailView,
-    NewspaperListView,
-    RedactorListView,
-    NewspaperDetailView,
-    RedactorDetailView,
     TopicCreateView,
-    NewspaperCreateView,
-    RedactorCreateView,
     TopicUpdateView,
     TopicDeleteView,
+    NewspaperListView,
+    NewspaperDetailView,
+    NewspaperCreateView,
     NewspaperUpdateView,
     NewspaperDeleteView,
-    RedactorUpdateView,
+    RedactorListView,
+    RedactorDetailView,
+    RedactorCreateView,
     RedactorDeleteView,
-
+    RedactorExperienceUpdateView,
+    toggle_assign_to_newspaper,
 )
 
 urlpatterns = [
     path("", index, name="index"),
-    path("topics_list/", TopicListView.as_view(), name="topics-list"),
-    path("topics_list/<int:pk>/", TopicDetailView.as_view(), name="topics-detail"),
-    path("topics_list/create/", TopicCreateView.as_view(), name="topics-create"),
-    path("topics_list/<int:pk>/update/", TopicUpdateView.as_view(), name="topics-update"),
-    path("topics_list/<int:pk>/delete/", TopicDeleteView.as_view(), name="topics-delete"),
-    path("newspaper_list/", NewspaperListView.as_view(), name="newspapers-list"),
-    path("newspaper_list/<int:pk>/", NewspaperDetailView.as_view(), name="newspapers-detail"),
-    path("newspaper_list/create/", NewspaperCreateView.as_view(), name="newspapers-create"),
-    path("newspaper_list/<int:pk>/update/", NewspaperUpdateView.as_view(), name="newspapers-update"),
-    path("newspaper_list/<int:pk>/delete/", NewspaperDeleteView.as_view(), name="newspapers-delete"),
-    path("redactor_list/", RedactorListView.as_view(), name="redactors-list"),
-    path("redactor_list/<int:pk>/", RedactorDetailView.as_view(), name="redactors-detail"),
-    path("redactor_list/create/", RedactorCreateView.as_view(), name="redactors-create"),
-    path("redactor_list/<int:pk>/update/", RedactorUpdateView.as_view(), name="redactors-update"),
-    path("redactor_list/<int:pk>/delete/", RedactorDeleteView.as_view(), name="redactors-delete"),
-
-
+    path(
+        "topics/",
+        TopicListView.as_view(),
+        name="topics-list"
+    ),
+    path(
+        "topics/<int:pk>/",
+        TopicDetailView.as_view(),
+        name="topics-detail"
+    ),
+    path(
+        "topics/create/",
+        TopicCreateView.as_view(),
+        name="topics-create"
+    ),
+    path(
+        "topics/<int:pk>/update/",
+        TopicUpdateView.as_view(),
+        name="topics-update"
+    ),
+    path(
+        "topics/<int:pk>/delete/",
+        TopicDeleteView.as_view(),
+        name="topics-delete"
+    ),
+    path(
+        "newspaper/",
+        NewspaperListView.as_view(),
+        name="newspapers-list"
+    ),
+    path(
+        "newspaper/<int:pk>/",
+        NewspaperDetailView.as_view(),
+        name="newspapers-detail"
+    ),
+    path(
+        "newspaper/create/",
+        NewspaperCreateView.as_view(),
+        name="newspapers-create"
+    ),
+    path(
+        "newspaper/<int:pk>/update/",
+        NewspaperUpdateView.as_view(),
+        name="newspapers-update"
+    ),
+    path(
+        "newspaper/<int:pk>/delete/",
+        NewspaperDeleteView.as_view(),
+        name="newspapers-delete"
+    ),
+    path(
+        "newspaper/<int:pk>/toggle-assign-newspaper/",
+        toggle_assign_to_newspaper,
+        name="toggle-newspaper",
+    ),
+    path(
+        "redactor/",
+        RedactorListView.as_view(),
+        name="redactors-list"
+    ),
+    path(
+        "redactor/<int:pk>/",
+        RedactorDetailView.as_view(),
+        name="redactors-detail"
+    ),
+    path(
+        "redactor/create/",
+        RedactorCreateView.as_view(),
+        name="redactors-create"
+    ),
+    path(
+        "redactor/<int:pk>/update/",
+        RedactorExperienceUpdateView.as_view(),
+        name="redactors-update"
+    ),
+    path(
+        "redactor/<int:pk>/delete/",
+        RedactorDeleteView.as_view(),
+        name="redactors-delete"
+    )
 ]
 
 app_name = "newspaper"
