@@ -1,15 +1,17 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
-
 from newspaper.forms import (
     RedactorCreationForm,
-    NewspaperForm,
     RedactorSearchForm,
+    RedactorExperienceUpdateForm,
+    NewspaperForm,
+    NewspaperSearchForm,
+    NewspaperUpdateForm,
     TopicSearchForm,
-    NewspaperSearchForm
 )
 from newspaper.models import (
     Redactor,
@@ -50,9 +52,9 @@ class TopicListView(
     generic.ListView
 ):
     model = Topic
-    paginate_by = 3
+    paginate_by = 4
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *, object_list=None, **kwargs) -> dict:
         context = super(TopicListView, self).get_context_data(**kwargs)
         title = self.request.GET.get("title", "")
         context["search_form"] = TopicSearchForm(
@@ -62,7 +64,7 @@ class TopicListView(
         )
         return context
 
-    def get_queryset(self):
+    def get_queryset(self) -> object:
         form = TopicSearchForm(self.request.GET)
         if form.is_valid():
             return Topic.objects.filter(
@@ -112,9 +114,9 @@ class NewspaperListView(
     generic.ListView
 ):
     model = Newspaper
-    paginate_by = 3
+    paginate_by = 4
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *, object_list=None, **kwargs) -> dict:
         context = super(NewspaperListView, self).get_context_data(**kwargs)
         title = self.request.GET.get("title", "")
         context["search_form"] = NewspaperSearchForm(
@@ -124,7 +126,7 @@ class NewspaperListView(
         )
         return context
 
-    def get_queryset(self):
+    def get_queryset(self) -> object:
         form = NewspaperSearchForm(self.request.GET)
         if form.is_valid():
             return Newspaper.objects.filter(
@@ -155,8 +157,7 @@ class NewspaperUpdateView(
 ):
     model = Newspaper
     success_url = reverse_lazy("newspaper:newspapers-list")
-    template_name = "newspaper/newspaper_form.html"
-    form_class = NewspaperForm
+    form_class = NewspaperUpdateForm
 
 
 class NewspaperDeleteView(
@@ -173,9 +174,9 @@ class RedactorListView(
     generic.ListView
 ):
     model = Redactor
-    paginate_by = 3
+    paginate_by = 4
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *, object_list=None, **kwargs) -> dict:
         context = super(RedactorListView, self).get_context_data(**kwargs)
         title = self.request.GET.get("title", "")
         context["search_form"] = RedactorSearchForm(
@@ -185,7 +186,7 @@ class RedactorListView(
         )
         return context
 
-    def get_queryset(self):
+    def get_queryset(self) -> object:
         form = RedactorSearchForm(self.request.GET)
         if form.is_valid():
             return Redactor.objects.filter(
@@ -212,14 +213,13 @@ class RedactorCreateView(
     form_class = RedactorCreationForm
 
 
-class RedactorUpdateView(
+class RedactorExperienceUpdateView(
     LoginRequiredMixin,
     generic.UpdateView
 ):
     model = Redactor
     success_url = reverse_lazy("newspaper:redactors-list")
-    template_name = "newspaper/redactor_form.html"
-    form_class = RedactorCreationForm
+    form_class = RedactorExperienceUpdateForm
 
 
 class RedactorDeleteView(
@@ -229,3 +229,15 @@ class RedactorDeleteView(
     model = Redactor
     success_url = reverse_lazy("newspaper:redactors-list")
     template_name = "newspaper/redactor_confirm_delete.html"
+
+
+@login_required
+def toggle_assign_to_newspaper(request, pk) -> HttpResponseRedirect:
+    redactor = Redactor.objects.get(id=request.user.id)
+    if (
+        Newspaper.objects.get(id=pk) in redactor.newspapers.all()
+    ):
+        redactor.newspapers.remove(pk)
+    else:
+        redactor.newspapers.add(pk)
+    return HttpResponseRedirect(reverse_lazy("newspaper:newspapers-detail", args=[pk]))
