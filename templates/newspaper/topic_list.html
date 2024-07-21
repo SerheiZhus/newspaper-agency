@@ -1,0 +1,64 @@
+{% extends 'base_background.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+{% block title %} Topic List {% endblock title %}
+{% block body %} style="background-image: url('{% static 'img/bg7.jpg' %}'); background-size: cover; height: 100vh;
+  margin: 0;"> {% endblock body %}
+
+{% block content %}
+
+  {% block header %}
+
+    {% include 'includes/navigation.html' %}
+
+  {% endblock header %}
+
+  <section class="pb-3 position-relative  mx-n3">
+  <div class="container ">
+    <div class="row">
+      <div class="col-md-6 text-end mb-4 mt-8">
+        <h3 class="text-white z-index-1">Topic List</h3>
+      </div>
+      <div class="col-md-6 text-end mb-4 mt-8"><a href="{% url 'newspaper:topics-create' %}" class="btn btn-success">
+        Create Topic</a>
+      </div>
+    </div>
+
+    <form method="get" action="" class="input-group input-group-outline">
+      {{ search_form|crispy }}
+      <input class="btn btn-secondary" type="submit" value="🔍">
+    </form>
+
+    {% if topic_list %}
+      <div class="row">
+      {% for topic in topic_list %}
+        <div class="col-lg-6 col-12">
+          <div class="card card-profile mt-4">
+            <div class="row">
+              <div class="col-lg-4 col-md-6 col-12 mt-n5">
+              </div>
+              <div class="col-lg-8 col-md-6 col-12 my-auto">
+                <div class="card-body ps-lg-0">
+                  <h5 class="mb-0"><a href="{% url 'newspaper:topics-detail' topic.id %}">{{ topic.name }}</a></h5>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>TThere are no topic in newspaper agency</p>
+    {% endif %}
+
+    </div>
+  </div>
+  </section>
+{% endblock content %}
+
+{% block javascrips %}
+
+{% endblock javascrips %}
+{% block footer %}
+{% endblock footer %}

@@ -1,0 +1,94 @@
+{% extends 'base_background.html' %}
+{% load custom_topic %}
+{% load сustom_newspaper %}
+{% load static %}
+{% block title %} Redactor Detail {% endblock title %}
+{% block body %} class="blog-author bg-gray-200" {% endblock body %}
+
+
+{% block content %}
+  {% include 'includes/navigation.html' %}
+  <!-- -------- START HEADER 4 w/ search book a ticket form ------- -->
+  <header>
+    <div class="page-header min-height-500" style="background-image: url('{% static 'img/01.jpg' %}');" loading="lazy">
+      <span class="mask bg-gradient-dark opacity-8"></span>
+    </div>
+  </header>
+  <!-- -------- END HEADER 4 w/ search book a ticket form ------- -->
+  <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6 mb-4">
+  <!-- START Testimonials w/ user image & text & info -->
+  <section class="py-sm-2 py-5 position-relative">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 mx-auto">
+          <div class="mt-n8 mt-md-n6 text-center">
+            
+          </div>
+          <div class="row py-5">
+            <div class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mx-auto">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h3 class="mb-0">{{ redactor.first_name }} {{ redactor.last_name }}</h3>
+                <div class="d-block">
+                  <a href="{% url 'newspaper:redactors-update' pk=redactor.id %}"
+                     class="btn btn-sm btn-outline-info text-nowrap mb-0">
+                    Update</a>
+                  <a href="{% url 'newspaper:redactors-delete' pk=redactor.id %}"
+                     class="btn btn-sm btn-outline-info text-danger mb-0">Delete</a>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col-auto">
+                  <span>Experience:</span>
+                  <span
+                      class="h6">{{ redactor.years_of_experience }} year{{ redactor.years_of_experience|pluralize }}
+                  </span>
+
+                </div>
+                <div class="col-auto">
+                  <span>Is staff:</span>
+                  <span class="h6">{{ redactor.is_staff }}</span>
+                </div>
+                <div class="col-auto">
+                  <span>Username:</span>
+                  <span class="h6">{{ redactor.username }}</span>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col-auto">
+
+
+                  <span>Newspapers:</span>
+                  {% with redactor.newspapers.all as newspapers %}
+                    {% if newspapers %}
+                      <span class="h6">{{ newspapers|newspaper_names }}</span>
+                    {% else %}
+                      <p>No Newspaper</p>
+                    {% endif %}
+                  {% endwith %}
+
+                </div>
+              </div>
+
+              <div class="row mb-4">
+                <div class="col-auto">
+                  <span>Topics:</span>
+                  {% with redactor|unique_topics as unique_topics %}
+                    {% if unique_topics %}
+                      <span class="h6">{{ unique_topics|join:", " }}</span>
+                    {% else %}
+                      <p>No Topic</p>
+                    {% endif %}
+                  {% endwith %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </section>
+  </div>
+{% endblock content %}
+{% block footer %}
+{% endblock footer %}

@@ -1,0 +1,28 @@
+{% extends 'base_background.html' %}
+{% load static %}
+{% block title %} {{ object|yesno:"Update ,Create" }} Newspaper {% endblock title %}
+{% block body %} style="background-image: url('{% static 'img/bg4.jpg' %}'); background-size: cover; height: 100vh; margin: 0;"> {% endblock body %}
+
+
+{% block content %}
+  {% include 'includes/navigation.html' %}
+  
+  <div class="pb-10 position-relative  mx-n3">
+  <div class="container ">
+    <div class="row">
+      <div class="col-md-7 text-start mb-4 mt-8">
+        <h3 class="text-white z-index-1">{{ object|yesno:"Update ,Create" }} newspaper </h3>
+      </div>
+    </div>
+    <form action="" method="post" class=" input-group-outline">
+  {% csrf_token %}
+    {{ form }}
+  <input class=" btn btn-success" type="submit" value="Submit">
+    </form>
+  </div>
+                
+    </div>
+ {% endblock content %}
+
+{% block footer %}
+{% endblock footer %}
