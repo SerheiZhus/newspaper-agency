@@ -96,4 +96,3 @@ class PrivateNewspaperTest(TestCase):
             queryset[0].published_date.strftime("%Y-%m-%d"),
             "2021-01-01"
         )
-

@@ -1,9 +1,13 @@
 from django.contrib.auth import get_user_model
-from django.core.exceptions import ValidationError
 from django.test import TestCase
-
-from newspaper.forms import NewspaperForm, RedactorCreationForm, RedactorExperienceUpdateForm, RedactorSearchForm, \
-    TopicSearchForm, NewspaperSearchForm
+from newspaper.forms import (
+    NewspaperForm,
+    RedactorCreationForm,
+    RedactorExperienceUpdateForm,
+    RedactorSearchForm,
+    TopicSearchForm,
+    NewspaperSearchForm
+)
 from django import forms
 
 from newspaper.models import Topic
@@ -11,7 +15,7 @@ from newspaper.models import Topic
 
 class FormsTests(TestCase):
 
-    def test_redactor_creation_form(self):
+    def test_redactor_creation_form(self) -> None:
         form_data = {
             "username": "test_user",
             "password1": "test_password",
@@ -63,7 +67,7 @@ class FormsTests(TestCase):
             form.changed_data
         )
 
-    def test_redactor_experience_update_form(self):
+    def test_redactor_experience_update_form(self) -> None:
         form = RedactorExperienceUpdateForm(
             data={
                 "years_of_experience": "10"
@@ -78,7 +82,7 @@ class FormsTests(TestCase):
 
 class SearchFormTests(TestCase):
 
-    def test_search_form(self):
+    def test_search_form(self) -> None:
         form_redactor = RedactorSearchForm(
             data={"title": "test_user"}
         )
@@ -103,8 +107,3 @@ class SearchFormTests(TestCase):
             form_newspaper.cleaned_data,
             {"title": "test_title"}
         )
-
-
-
-
-

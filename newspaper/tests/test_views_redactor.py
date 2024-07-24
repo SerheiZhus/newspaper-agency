@@ -77,4 +77,3 @@ class PrivateTopicTest(TestCase):
             queryset[0].years_of_experience,
             1
         )
-

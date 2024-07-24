@@ -40,9 +40,3 @@ class AdminSiteTests(TestCase):
         )
         res = self.client.get(url)
         self.assertContains(res, self.redactor.years_of_experience)
-
-
-
-
-
-
