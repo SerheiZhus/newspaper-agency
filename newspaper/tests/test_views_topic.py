@@ -25,7 +25,7 @@ class PrivateTopicTest(TestCase):
         )
 
         Topic.objects.create(
-                name=f"test1",
+                name="test1",
 
             )
         self.client.force_login(self.redactor)
@@ -66,6 +66,3 @@ class PrivateTopicTest(TestCase):
             queryset[0].name,
             "test1"
         )
-
-
-

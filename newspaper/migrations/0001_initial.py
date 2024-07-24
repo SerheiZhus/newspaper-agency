@@ -46,7 +46,11 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("password", models.CharField(max_length=128, verbose_name="password")),
+                ("password", models.CharField(
+                    max_length=128,
+                    verbose_name="password"
+                )
+                 ),
                 (
                     "last_login",
                     models.DateTimeField(
@@ -57,7 +61,8 @@ class Migration(migrations.Migration):
                     "is_superuser",
                     models.BooleanField(
                         default=False,
-                        help_text="Designates that this user has all permissions without explicitly assigning them.",
+                        help_text="Designates that this user has all "
+                                  "permissions without explicitly assigning them.",
                         verbose_name="superuser status",
                     ),
                 ),
@@ -67,7 +72,8 @@ class Migration(migrations.Migration):
                         error_messages={
                             "unique": "A user with that username already exists."
                         },
-                        help_text="Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
+                        help_text="Required. 150 characters or fewer. "
+                                  "Letters, digits and @/./+/-/_ only.",
                         max_length=150,
                         unique=True,
                         validators=[
@@ -85,13 +91,17 @@ class Migration(migrations.Migration):
                 (
                     "last_name",
                     models.CharField(
-                        blank=True, max_length=150, verbose_name="last name"
+                        blank=True,
+                        max_length=150,
+                        verbose_name="last name"
                     ),
                 ),
                 (
                     "email",
                     models.EmailField(
-                        blank=True, max_length=254, verbose_name="email address"
+                        blank=True,
+                        max_length=254,
+                        verbose_name="email address"
                     ),
                 ),
                 (
@@ -106,7 +116,8 @@ class Migration(migrations.Migration):
                     "is_active",
                     models.BooleanField(
                         default=True,
-                        help_text="Designates whether this user should be treated as active. Unselect this instead of deleting accounts.",
+                        help_text="Designates whether this user should be treated as active. "
+                                  "Unselect this instead of deleting accounts.",
                         verbose_name="active",
                     ),
                 ),

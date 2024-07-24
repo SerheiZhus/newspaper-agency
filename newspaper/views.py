@@ -240,4 +240,9 @@ def toggle_assign_to_newspaper(request, pk) -> HttpResponseRedirect:
         redactor.newspapers.remove(pk)
     else:
         redactor.newspapers.add(pk)
-    return HttpResponseRedirect(reverse_lazy("newspaper:newspapers-detail", args=[pk]))
+    return HttpResponseRedirect(
+        reverse_lazy(
+            "newspaper:newspapers-detail",
+            args=[pk]
+        )
+    )

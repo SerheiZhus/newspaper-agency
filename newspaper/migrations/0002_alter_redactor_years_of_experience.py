@@ -13,6 +13,10 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="redactor",
             name="years_of_experience",
-            field=models.PositiveIntegerField(blank=True, default=0, null=True),
+            field=models.PositiveIntegerField(
+                blank=True,
+                default=0,
+                null=True
+            ),
         ),
     ]

@@ -13,7 +13,7 @@ from newspaper.models import (
 
 
 class RedactorCreationForm(UserCreationForm):
-    EXPERIENCE = 100  # years
+    EXPERIENCE = 100
     years_of_experience = forms.CharField(
         required=True,
         validators=[
@@ -22,7 +22,7 @@ class RedactorCreationForm(UserCreationForm):
         ]
     )
 
-    class Meta:
+    class Meta(UserCreationForm.Meta):
         model = Redactor
         fields = UserCreationForm.Meta.fields + (
             "username",

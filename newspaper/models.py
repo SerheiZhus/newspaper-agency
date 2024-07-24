@@ -27,7 +27,7 @@ class Redactor(AbstractUser):
     def __str__(self) -> str:
         return f"{self.username}"
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> str:
         return reverse("newspaper:redactors-detail", args=[str(self.id)])
 
 
@@ -36,7 +36,10 @@ class Newspaper(models.Model):
     content = models.TextField()
     published_date = models.DateField()
     topic = models.ManyToManyField(Topic, related_name="newspapers")
-    publishers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="newspapers")
+    publishers = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name="newspapers"
+    )
 
     class Meta:
         ordering = ("title", )
