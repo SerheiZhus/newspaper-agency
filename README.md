@@ -1,10 +1,15 @@
 # newspaper-agency
 Django project for managing topics, redactors and newspapers in agency.
 
-# Check it out
+## Check it out
 [Newspaper Agency deployed to Render](https://newspaper-agency-ylds.onrender.com)
 
-# Installation
+* login: user
+* password: user12345
+
+
+
+## Installation
 Python3 must be already installed. 
 
 ```shell
@@ -16,7 +21,7 @@ pip install -r requirements.txt
 .env Create a .env file in the root of the project using the example from .env.sample. Fill in the values in the .env file with your own data.
 python manage.py migrate, python manage.py createsuperuser, python manage.py runserver
 ```
-# Demo
+## Demo
 ![Website Interface](demo.png)
 
 
